@@ -1,0 +1,24 @@
+{
+  "name": "pomodoro-timer",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Pomodoro timer for developers",
+  "main": "webpack.config.js",
+  "repository": "git@github.com:therapy/pomodoro.git",
+  "author": "Therapy <therapyspb@yandex.ru>",
+  "license": "MIT",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^16.1.1",
+    "react-dom": "^16.1.1",
+    "react-scripts": "1.0.17"
+  },
+  "devDependencies": {
+    "csscomb": "^4.2.0"
+  }
+}

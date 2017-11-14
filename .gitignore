@@ -1,0 +1,10 @@
+node_modules
+.vscode
+build
+.publish
+
+.jscsrc
+.jshintrc
+.csscomb.json
+
+yarn-error.log
