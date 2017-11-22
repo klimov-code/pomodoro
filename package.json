@@ -19,13 +19,14 @@
   },
   "dependencies": {
     "react": "^16.1.1",
+    "react-document-title": "^2.0.3",
     "react-dom": "^16.1.1",
-    "react-scripts": "1.0.17",
-    "webpack": "^3.8.1",
-    "webpack-dev-server": "^2.9.4"
+    "react-scripts": "1.0.17"
   },
   "devDependencies": {
     "csscomb": "^4.2.0",
-    "gh-pages": "^1.0.0"
+    "gh-pages": "^1.0.0",
+    "webpack": "^3.8.1",
+    "webpack-dev-server": "^2.9.4"
   }
 }
