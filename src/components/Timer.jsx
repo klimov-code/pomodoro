@@ -5,23 +5,25 @@ const { oneOfType, string, func } = PropTypes;
 
 // TODO: sync Timer and Title
 export default class Timer extends Component {
+
   static propTypes = {
-    timer: oneOfType([string, func]).isRequired
+    timer: oneOfType([string, func]).isRequired,
+    toggleTimer: PropTypes.func.isRequired,
+    resetTimer: PropTypes.func.isRequired
   }
 
   updateTimer(timer) {
-    return (typeof timer === 'function') ? timer(0) : timer;
+    return (typeof timer === 'function') ? timer() : timer;
   }
 
   render() {
     const { timer } = this.props;
-
     return(
-      <div>{this.updateTimer(timer)}</div>
+      <div>
+        {this.updateTimer(timer)}
+        <button type='button' onClick={this.props.toggleTimer}>start</button>
+        <button type='button' onClick={this.props.resetTimer}>reset</button>
+      </div>
     );
   }
-}
-
-class Controls extends Component {
-
 }

@@ -7,7 +7,3 @@ export default class Footer extends Component {
     );
   }
 }
-
-class Storage extends Component {
-  
-}
