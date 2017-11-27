@@ -50,23 +50,37 @@ export default class Pomodoro extends Component {
   }
 
   tick() {
-    if (this.state.time > 0) {
+    let mode = this.state.mode,
+        time = this.state.time,
+        pomodoroCount = this.state.pomodoroCount;
+
+    if (time > 0) {
       this.setState(prevState => ({
         time: prevState.time - 1
       }));
-    } else if (this.state.mode === 'work') {
-      this.pauseTimer();
+    } else if (mode === 'work' && (pomodoroCount%3 !== 0 || pomodoroCount === 0)) {
+      this.changeState(3, 'break');
+    } else if (mode === 'work' && pomodoroCount%3 === 0) {
+      this.changeState(9, 'break');
+      console.info('%cYou work a long time, go take a cap of coffee', 'color: blue');
+    } else {
+      this.changeState(15, 'work');
+    }
+  }
+
+  changeState(time, mode) {
+    this.pauseTimer();
+    this.setState(prevState => ({
+      time: time,
+      mode: mode,
+    }));
+    if (mode === 'break') {
       this.setState(prevState => ({
-        time: 3,
-        mode: 'break',
         pomodoroCount: prevState.pomodoroCount + 1
       }));
       console.info('%cPomodoro Count: ' + this.state.pomodoroCount, 'color: tomato');
     } else {
-      this.pauseTimer();
       this.setState(prevState => ({
-        time: 15,
-        mode: 'work',
         breakCount: prevState.breakCount + 1
       }));
       console.info('%cBreak Count: ' + this.state.breakCount, 'color: green');
