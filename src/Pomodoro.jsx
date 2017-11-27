@@ -101,7 +101,7 @@ export default class Pomodoro extends Component {
   formatTime(seconds) {
     const format = (number) => (number > 9) ? number : '0' + number;
 
-    return `${format(Math.floor(seconds / 3600))}:${format(Math.floor(seconds / 60 % 60))}:${format(Math.floor(seconds % 60))}`;
+    return `${format(Math.floor(seconds / 60 % 60))}:${format(Math.floor(seconds % 60))}`;
   }
 
   getTitle() {
