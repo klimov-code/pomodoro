@@ -34,8 +34,8 @@ export default class Pomodoro extends Component {
   }
 
   resetTimer() {
-    this.setInitialState();
     this.pauseTimer();
+    this.setInitialState();
     this.resetLocalStorage();
   }
 

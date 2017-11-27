@@ -24,7 +24,6 @@
     "react-scripts": "1.0.17"
   },
   "devDependencies": {
-    "csscomb": "^4.2.0",
     "gh-pages": "^1.0.0",
     "webpack": "^3.8.1",
     "webpack-dev-server": "^2.9.4"
