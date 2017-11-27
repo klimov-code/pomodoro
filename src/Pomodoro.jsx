@@ -12,14 +12,14 @@ export default class Pomodoro extends Component {
     this.tick = this.tick.bind(this);
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
-    this.setTitle = this.setTitle.bind(this);
-    this.setTime = this.setTime.bind(this);
+    this.getTitle = this.getTitle.bind(this);
+    this.getTime = this.getTime.bind(this);
   }
 
   state = {
     play: false,
     time: 0,
-    break: 0,
+    mode: '',
     pomodoroCount: 0,
     breakCount: 0
   }
@@ -29,7 +29,7 @@ export default class Pomodoro extends Component {
     this.getLocalStorage();
   }
 
-  componentDidUpdate() {
+  componentWillUnmount() {
     this.setLocalStorage();
   }
 
@@ -42,17 +42,35 @@ export default class Pomodoro extends Component {
   setInitialState() {
     this.setState({
       play: false,
-      time: 1500,
-      break: 300,
+      time: 15,
+      mode: 'work',
       pomodoroCount: 0,
       breakCount: 0
     });
   }
 
   tick() {
-    this.setState(prevState => ({
-      time: prevState.time - 1
-    }));
+    if (this.state.time > 0) {
+      this.setState(prevState => ({
+        time: prevState.time - 1
+      }));
+    } else if (this.state.mode === 'work') {
+      this.pauseTimer();
+      this.setState(prevState => ({
+        time: 3,
+        mode: 'break',
+        pomodoroCount: prevState.pomodoroCount + 1
+      }));
+      console.info('%cPomodoro Count: ' + this.state.pomodoroCount, 'color: tomato');
+    } else {
+      this.pauseTimer();
+      this.setState(prevState => ({
+        time: 15,
+        mode: 'work',
+        breakCount: prevState.breakCount + 1
+      }));
+      console.info('%cBreak Count: ' + this.state.breakCount, 'color: green');
+    }
   }
 
   startTimer() {
@@ -86,11 +104,11 @@ export default class Pomodoro extends Component {
     return `${format(Math.floor(seconds / 3600))}:${format(Math.floor(seconds / 60 % 60))}:${format(Math.floor(seconds % 60))}`;
   }
 
-  setTitle() {
-    return `${this.formatTime(this.state.time)} | Pomodoro Timer`;
+  getTitle() {
+    return `(${this.formatTime(this.state.time)}) Pomodoro Timer - time management method`;
   }
 
-  setTime() {
+  getTime() {
     return this.formatTime(this.state.time);
   }
 
@@ -113,9 +131,9 @@ export default class Pomodoro extends Component {
   render() {
     return(
       <div>
-        <Title title={this.setTitle} />
+        <Title title={this.getTitle} />
         <Header />
-        <Timer timer={this.setTime} toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} />
+        <Timer timer={this.getTime} toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} />
         <Footer />
       </div>
     );
