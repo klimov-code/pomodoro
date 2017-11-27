@@ -24,21 +24,6 @@ export default class Pomodoro extends Component {
     breakCount: 0
   }
 
-  componentDidMount() {
-    this.setInitialState();
-    this.getLocalStorage();
-  }
-
-  componentWillUnmount() {
-    this.setLocalStorage();
-  }
-
-  resetTimer() {
-    this.pauseTimer();
-    this.setInitialState();
-    this.resetLocalStorage();
-  }
-
   setInitialState() {
     this.setState({
       play: false,
@@ -49,11 +34,21 @@ export default class Pomodoro extends Component {
     });
   }
 
+  componentDidMount() {
+    this.setInitialState();
+    this.getLocalStorage();
+  }
+
+  componentWillUnmount() {
+    this.setLocalStorage();
+  }
+
+  
   tick() {
     let mode = this.state.mode,
-        time = this.state.time,
-        pomodoroCount = this.state.pomodoroCount;
-
+    time = this.state.time,
+    pomodoroCount = this.state.pomodoroCount;
+    
     if (time > 0) {
       this.setState(prevState => ({
         time: prevState.time - 1
@@ -67,7 +62,7 @@ export default class Pomodoro extends Component {
       this.changeState(15, 'work');
     }
   }
-
+  
   changeState(time, mode) {
     this.pauseTimer();
     this.setState(prevState => ({
@@ -86,19 +81,19 @@ export default class Pomodoro extends Component {
       console.info('%cBreak Count: ' + this.state.breakCount, 'color: green');
     }
   }
-
+  
   startTimer() {
     clearInterval(this.countdown);
     this.countdown = setInterval(this.tick, 1000);
-
+    
     this.setState({
       play: true
     });
   }
-
+  
   pauseTimer() {
     clearInterval(this.countdown);
-
+    
     this.setState({
       play: false
     });
@@ -112,16 +107,22 @@ export default class Pomodoro extends Component {
     }
   }
 
+  resetTimer() {
+    this.pauseTimer();
+    this.setInitialState();
+    this.resetLocalStorage();
+  }
+  
   formatTime(seconds) {
     const format = (number) => (number > 9) ? number : '0' + number;
-
+    
     return `${format(Math.floor(seconds / 60 % 60))}:${format(Math.floor(seconds % 60))}`;
   }
-
+  
   getTitle() {
     return `(${this.formatTime(this.state.time)}) Pomodoro Timer - time management method`;
   }
-
+  
   getTime() {
     return this.formatTime(this.state.time);
   }
