@@ -9,8 +9,7 @@ export default class Timer extends Component {
 
   static propTypes = {
     timer: oneOfType([string, func]).isRequired,
-    toggleTimer: PropTypes.func.isRequired,
-    resetTimer: PropTypes.func.isRequired
+    play: PropTypes.bool.isRequired
   }
 
   updateTimer(timer) {
@@ -18,12 +17,10 @@ export default class Timer extends Component {
   }
 
   render() {
-    const { timer } = this.props;
+    const { timer} = this.props;
     return(
       <div>
         {this.updateTimer(timer)}
-        <button type='button' onClick={this.props.toggleTimer}>start</button>
-        <button type='button' onClick={this.props.resetTimer}>reset</button>
       </div>
     );
   }

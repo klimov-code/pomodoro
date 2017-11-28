@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Title from './components/Title';
 import Header from './components/Header';
 import Timer from './components/Timer';
+import Controls from './components/Controls'
 import Footer from './components/Footer';
 
 export default class Pomodoro extends Component {
@@ -46,8 +47,8 @@ export default class Pomodoro extends Component {
   
   tick() {
     let mode = this.state.mode,
-    time = this.state.time,
-    pomodoroCount = this.state.pomodoroCount;
+        time = this.state.time,
+        pomodoroCount = this.state.pomodoroCount;
     
     if (time > 0) {
       this.setState(prevState => ({
@@ -57,7 +58,7 @@ export default class Pomodoro extends Component {
       this.changeState(3, 'break');
     } else if (mode === 'work' && pomodoroCount%3 === 0) {
       this.changeState(9, 'break');
-      console.info('%cYou work a long time, go take a cap of coffee', 'color: blue');
+      console.info('%cYou worked hard, go get some rest and have a cup of coffee', 'color: blue');
     } else {
       this.changeState(15, 'work');
     }
@@ -148,7 +149,8 @@ export default class Pomodoro extends Component {
       <div>
         <Title title={this.getTitle} />
         <Header />
-        <Timer timer={this.getTime} toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} />
+        <Timer timer={this.getTime}/>
+        <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} />
         <Footer />
       </div>
     );
