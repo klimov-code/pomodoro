@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Title from './components/Title';
 import Header from './components/Header';
 import Timer from './components/Timer';
+import Clockface from './components/Clockface'
 import Controls from './components/Controls'
 import Footer from './components/Footer';
 
@@ -9,7 +10,6 @@ export default class Pomodoro extends Component {
   
   constructor(props) {
     super(props);
-    // this.togglePlay = ::this.togglePlay // ES7 format
     this.tick = this.tick.bind(this);
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
@@ -55,16 +55,16 @@ export default class Pomodoro extends Component {
         time: prevState.time - 1
       }));
     } else if (mode === 'work' && (pomodoroCount%3 !== 0 || pomodoroCount === 0)) {
-      this.changeState(3, 'break');
+      this.changeModeState(3, 'break');
     } else if (mode === 'work' && pomodoroCount%3 === 0) {
-      this.changeState(9, 'break');
+      this.changeModeState(9, 'break');
       console.info('%cYou worked hard, go get some rest and have a cup of coffee', 'color: blue');
     } else {
-      this.changeState(15, 'work');
+      this.changeModeState(15, 'work');
     }
   }
   
-  changeState(time, mode) {
+  changeModeState(time, mode) {
     this.pauseTimer();
     this.setState(prevState => ({
       time: time,
@@ -84,7 +84,6 @@ export default class Pomodoro extends Component {
   }
   
   startTimer() {
-    clearInterval(this.countdown);
     this.countdown = setInterval(this.tick, 1000);
     
     this.setState({
@@ -150,7 +149,8 @@ export default class Pomodoro extends Component {
         <Title title={this.getTitle} />
         <Header />
         <Timer timer={this.getTime}/>
-        <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} />
+        <Clockface width={1100} height={700} color={'#ff6347'} animationSpeed={100} play={this.state.play} />
+        <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={this.state.play} />
         <Footer />
       </div>
     );

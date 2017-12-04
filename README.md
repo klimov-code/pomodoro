@@ -1,32 +1,32 @@
 # Task list:
 
-- [x] базовый функционал
-- [x] локальное хранилище
-- [x] структура папок
-  - [x] каждый компонент в отдельной папке
-  - [x] стили рядом с компонентом
+- [x] basic functionality
+- [x] local storage
+- [x] folder structure
+  - [x] each component in a separate folder
+  - [x] styles next to the component
 - [ ] js
-  - [ ] анимация таймера
-    - [ ] циферблат на канвасе
-  - [ ] элементы управления
-  - [ ] настраиваемое время
-    - [ ] ограничители (например, work > break)
+  - [ ] animation timer
+    - [ ] dial in <canvas>
+  - [ ] controls
+  - [ ] configurable time
+    - [ ] constraints (for example, work > break)
 - [ ] css
-  - [ ] адаптивность
-  - [ ] стили компонентов
-    - [ ] шапка
-    - [ ] таймер
-      - [ ] анимация таймера
-    - [ ] элементы управления
-    - [ ] подвал
-- [ ] аудио-оповещение
-  - [ ] несколько разных звуков
-  - [ ] выбор аудио
-  - [ ] регулятор громкости
-- [ ] фавикон
-- [ ] локализация
-- [ ] социальные сети
-- [ ] подддержка pugjs в react и webpack
-- [x] поддержка sass в webpack
-- [ ] тесты
-- [ ] синхронизировать таймеры в заголовке и на странице
+  - [ ] adaptability
+  - [ ] component styles
+    - [ ] header
+    - [ ] timer
+      - [ ] animation timer
+    - [ ] controls
+    - [ ] footer
+- [] audio notification
+  - [ ] several different audios
+  - [ ] select audio
+  - [ ] volume control
+- [ ] favicon
+- [ ] localization
+- [ ] social networks
+- [ ] pugjs support in react and webpack
+- [x] support sass in webpack
+- [ ] tests
+- [ ] synchronize timers in the header and on the page

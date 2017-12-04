@@ -1,7 +1,5 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
-
-const { oneOfType, string, func } = PropTypes;
+import { oneOfType, string, func } from 'prop-types';
 
 export default class Title extends Component {
 

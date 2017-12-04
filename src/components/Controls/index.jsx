@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import { func, bool } from 'prop-types';
 import './index.scss';
 
 export default class Timer extends Component {
 
   static propTypes = {
-    toggleTimer: PropTypes.func.isRequired,
-    resetTimer: PropTypes.func.isRequired
+    toggleTimer: func.isRequired,
+    resetTimer: func.isRequired,
+    play: bool.isRequired
   }
 
   render() {
     return (
       <div>
-        <button type='button' onClick={this.props.toggleTimer}>start</button>
+        <button type='button' onClick={this.props.toggleTimer}>{this.props.play ? 'pause' : 'play'}</button>
         <button type='button' onClick={this.props.resetTimer}>reset</button>
       </div>
     );
