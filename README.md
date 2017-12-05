@@ -6,18 +6,18 @@
   - [x] each component in a separate folder
   - [x] styles next to the component
 - [ ] js
-  - [ ] animation timer
-    - [ ] dial in <canvas>
+  - [ ] animation dial
+    - [x] dial in <canvas>
   - [ ] controls
   - [ ] configurable time
     - [ ] constraints (for example -> work > break)
-  - [ ] update timer font immediately
+  - [ ] update timer font immediately (with an open console is no font loading)
 - [ ] css
   - [ ] adaptability
   - [ ] component styles
     - [ ] header
-    - [ ] timer
-      - [ ] animation timer
+    - [ ] clockface
+      - [ ] animation dial
     - [ ] controls
     - [ ] footer
 - [] audio notification

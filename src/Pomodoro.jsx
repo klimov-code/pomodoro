@@ -147,7 +147,7 @@ export default class Pomodoro extends Component {
       <div>
         <Title title={this.getTitle} />
         <Header />
-        <Clockface timer={this.getTime} width={1280} height={720} play={this.state.play} />
+        <Clockface timer={this.getTime} width={1000} height={700} play={this.state.play} />
         <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={this.state.play} />
         <Footer />
       </div>
