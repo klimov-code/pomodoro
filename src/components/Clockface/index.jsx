@@ -23,20 +23,21 @@ export default class Clockface extends Component {
     return (
       <Stage width={this.props.width} height={this.props.height}>
         <Layer>
-          {[...Array(15).keys()].map((r, i) => {
-            let degree = 10;
-            let setX = this.props.width / 2 + Math.cos(degree * i * 0.017453) * 500;
-            let setY = this.props.height / 2 + Math.sin(degree * i * 0.0174533) * 280;
+          {[...Array(16).keys()].map((r, i) => {
+            let degree = 6;
+            let setX = this.props.width / 2 + Math.cos(degree * i * (Math.PI / 180)) * this.props.height / 2;
+            let setY = this.props.height / 2 - 100 + Math.sin(degree * i * (Math.PI / 180)) * this.props.height / 2;
 
             return <Rect
               ref={'rect' + i}
               key={i}
               name={String(i)}
               cornerRadius={8}
+              rotation={(degree * i) - 90}
               x={setX}
               y={setY}
               width={20}
-              height={60}
+              height={i % 5 === 0 ? 80 : 60}
               fill={'whitesmoke'}
             />
           })}
