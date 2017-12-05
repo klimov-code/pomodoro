@@ -1,20 +1,25 @@
 import React, { Component } from 'react';
-import { string, number, bool } from 'prop-types';
-import { Stage, Layer, Rect } from 'react-konva';
-import { Util } from 'konva'
+import { number, bool, oneOfType, string, func } from 'prop-types';
+import { Stage, Layer, Group, Rect, Text } from 'react-konva';
+
+import './index.scss';
 
 // codename "Stonehedge"
 export default class Clockface extends Component {
 
   static propTypes = {
+    timer: oneOfType([string, func]).isRequired,
     width: number.isRequired,
     height: number.isRequired,
-    color: string,
-    animationSpeed: number,
     play: bool
   }
 
+  updateTimer(timer) {
+    return (typeof timer === 'function') ? timer() : timer;
+  }
+
   render() {
+    const { timer } = this.props;
     return (
       <Stage width={this.props.width} height={this.props.height}>
         <Layer>
@@ -32,9 +37,22 @@ export default class Clockface extends Component {
               y={setY}
               width={20}
               height={60}
-              fill={'tomato'}
+              fill={'whitesmoke'}
             />
           })}
+        </Layer>
+        <Layer>
+          <Group>
+            <Text
+              text={this.updateTimer(timer)}
+              x={this.props.width / 2 - 150}
+              y={this.props.height / 2 - 50}
+              fill={'whitesmoke'}
+              fontSize={120}
+              fontStyle={'bold'}
+              fontFamily={'Roboto'}
+            />
+          </Group>
         </Layer>
       </Stage>
     );

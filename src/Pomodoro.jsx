@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Title from './components/Title';
 import Header from './components/Header';
-import Timer from './components/Timer';
 import Clockface from './components/Clockface'
 import Controls from './components/Controls'
 import Footer from './components/Footer';
@@ -148,8 +147,7 @@ export default class Pomodoro extends Component {
       <div>
         <Title title={this.getTitle} />
         <Header />
-        <Timer timer={this.getTime}/>
-        <Clockface width={1100} height={700} color={'#ff6347'} animationSpeed={100} play={this.state.play} />
+        <Clockface timer={this.getTime} width={1280} height={720} play={this.state.play} />
         <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={this.state.play} />
         <Footer />
       </div>

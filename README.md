@@ -1,4 +1,4 @@
-# Task list:
+# Tasks list:
 
 - [x] basic functionality
 - [x] local storage
@@ -10,7 +10,8 @@
     - [ ] dial in <canvas>
   - [ ] controls
   - [ ] configurable time
-    - [ ] constraints (for example, work > break)
+    - [ ] constraints (for example -> work > break)
+  - [ ] update timer font immediately
 - [ ] css
   - [ ] adaptability
   - [ ] component styles
@@ -27,6 +28,6 @@
 - [ ] localization
 - [ ] social networks
 - [ ] pugjs support in react and webpack
-- [x] support sass in webpack
+- [x] sass support in webpack
 - [ ] tests
 - [ ] synchronize timers in the header and on the page
