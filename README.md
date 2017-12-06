@@ -7,7 +7,7 @@
   - [x] styles next to the component
 - [ ] js
   - [ ] animation dial
-    - [x] dial in <canvas>
+    - [x] dial in canvas
   - [ ] controls
   - [ ] configurable time
     - [ ] constraints (for example -> work > break)
@@ -20,7 +20,7 @@
       - [ ] animation dial
     - [ ] controls
     - [ ] footer
-- [] audio notification
+- [ ] audio notification
   - [ ] several different audios
   - [ ] select audio
   - [ ] volume control

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { number, bool, oneOfType, string, func } from 'prop-types';
 import { Stage, Layer, Group, Rect, Text } from 'react-konva';
+import Konva from 'konva';
 
 import './index.scss';
 
@@ -27,12 +28,23 @@ export default class Clockface extends Component {
   }
 
   componentDidUpdate() {
-    const dial = this.refs.canvasDial10;
-    dial.to({
-      x: 500,
-      y: 500,
-      duration: 0.3
+    const dial = this.refs.dial.children;
+    dial.forEach(sec => {
+      sec.to({
+        x: 500,
+        y: 500,
+        duration: 0.5,
+        easing: Konva.Easings.EaseInOut
+      });
     });
+  }
+
+  setCoordinates(index) {
+    let degree = 6;
+    let setX = (this.props.width / 2) + (Math.cos(degree * index * (Math.PI / 180)) * this.props.height / 2);
+    let setY = (this.props.height / 2) + (Math.sin(degree * index * (Math.PI / 180)) * this.props.height / 2) - 100;
+
+    return { degree, setX, setY };
   }
 
   updateTimer(timer) {
@@ -44,38 +56,45 @@ export default class Clockface extends Component {
     return (
       <Stage width={width} height={height}>
         <Layer>
-          <Group>
-            {[...Array(16).keys()].map((r, i) => {
-              let degree = 6;
-              let setX = (width / 2) + (Math.cos(degree * i * (Math.PI / 180)) * height / 2);
-              let setY = (height / 2) + (Math.sin(degree * i * (Math.PI / 180)) * height / 2) - 100;
+          <Group ref={'dial'}>
+            {[...Array(16).keys()].map((_, index) => {
+              const { degree, setX, setY } = this.setCoordinates(index);
 
               return <Rect
-                ref={'canvasDial' + i}
-                key={i}
-                name={'' + i}
+                key={index}
+                name={'' + index}
+
                 cornerRadius={8}
-                rotation={(degree * i) - 90}
+                fill={'#f5f5f5'}
+                opacity={0.06 * index + 0.1}
+
                 x={setX}
                 y={setY}
-                opacity={0.06 * i + 0.1}
                 width={20}
-                height={i % 5 ? 60 : 80}
-                fill={'#f5f5f5'}
+                height={index % 5 ? 60 : 80}
+                rotation={(degree * index) - 90}
+                offset={{
+                  x: 10,
+                  y: index % 5 ? 30 : 40
+                }}
               />
             })}
           </Group>
         </Layer>
         <Layer>
           <Text
-            ref={'canvasTimer'}
-            text={this.updateTimer(timer)}
-            x={width / 2 - 150}
-            y={height / 2 - 50}
-            fill={'#f5f5f5'}
+            fontFamily={'Roboto'}
             fontSize={120}
             fontStyle={'bold'}
-            fontFamily={'Roboto'}
+
+            text={this.updateTimer(timer)}
+            align={'center'}
+            fill={'#f5f5f5'}
+
+            x={width / 2 - 200}
+            y={height / 2 - 60}
+            width={400}
+            height={120}
           />
         </Layer>
       </Stage>
