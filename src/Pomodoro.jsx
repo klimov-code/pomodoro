@@ -7,8 +7,8 @@ import Footer from './components/Footer';
 
 export default class Pomodoro extends Component {
   
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.tick = this.tick.bind(this);
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
@@ -40,6 +40,7 @@ export default class Pomodoro extends Component {
   }
 
   componentWillUnmount() {
+    this.pauseTimer()
     this.setLocalStorage();
   }
 
@@ -83,6 +84,7 @@ export default class Pomodoro extends Component {
   }
   
   startTimer() {
+    clearInterval(this.countdown);
     this.countdown = setInterval(this.tick, 1000);
     
     this.setState({
@@ -143,12 +145,14 @@ export default class Pomodoro extends Component {
   }
 
   render() {
+    const { play } = this.state;
+
     return(
       <div>
         <Title title={this.getTitle} />
         <Header />
-        <Clockface timer={this.getTime} width={1000} height={700} play={this.state.play} />
-        <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={this.state.play} />
+        <Clockface timer={this.getTime} width={1000} height={700} play={play} />
+        <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={play} />
         <Footer />
       </div>
     );

@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import { number, bool, oneOfType, string, func } from 'prop-types';
 import { Stage, Layer, Group, Rect, Text } from 'react-konva';
-import Konva from 'konva';
+import { Easings } from 'konva';
 
 import './index.scss';
 
 // codename "Stonehedge"
 export default class Clockface extends Component {
 
+  state = {
+    dial: []
+  }
+
   static propTypes = {
     timer: oneOfType([string, func]).isRequired,
     width: number.isRequired,
     height: number.isRequired,
-    play: bool
+    play: bool.isRequired
   }
 
   shouldComponentUpdate(nextProps) {
@@ -27,22 +31,71 @@ export default class Clockface extends Component {
     return true;
   }
 
-  componentDidUpdate() {
-    const dial = this.refs.dial.children;
-    dial.forEach(sec => {
-      sec.to({
-        x: 500,
-        y: 500,
-        duration: 0.5,
-        easing: Konva.Easings.EaseInOut
-      });
+  componentDidMount() {
+    this.setInitialState();
+  }
+
+  componentWillUpdate() {
+    const DIAL = this.refs.dial.children;
+    const firstDivision = DIAL[0];
+
+    DIAL.map((division, index) => {
+      if (index < 15 ) {
+        const { degree, setX, setY } = this.getCoordinates(index + 1);
+
+        division.to({
+          opacity: 0.1 + 0.06 * (index + 1),
+          x: setX,
+          y: setY,
+          rotation: 90 - degree * (index + 1),
+          duration: 0.5,
+          easing: Easings.EaseInOut
+        });
+      } else {
+        division.to({
+          opacity: firstDivision.opacity,
+          x: firstDivision.x,
+          y: firstDivision.y,
+          rotation: firstDivision.rotation,
+          duration: 0.5,
+          easing: Easings.EaseInOut
+        });
+      }
+
+      return this;
+    });
+
+    this.updateState(DIAL);
+  }
+
+  updateState(state) {
+    this.setState({
+      dial: state
     });
   }
 
-  setCoordinates(index) {
+  setInitialState() {
+    const DIAL = [...Array(15)].map((_, index) => {
+      const { degree, setX, setY } = this.getCoordinates(index);
+
+      return {
+        opacity: 0.1 + 0.06 * index,
+        x: setX,
+        y: setY,
+        width: 20,
+        height: index % 5 ? 60 : 80,
+        rotation: 90 - degree * index,
+      }
+    });
+
+    this.updateState(DIAL);
+  }
+
+  getCoordinates(index) {
+    const { width, height } = this.props;
     let degree = 6;
-    let setX = (this.props.width / 2) + (Math.cos(degree * index * (Math.PI / 180)) * this.props.height / 2);
-    let setY = (this.props.height / 2) + (Math.sin(degree * index * (Math.PI / 180)) * this.props.height / 2) - 100;
+    let setX = (width / 2) + (Math.cos(degree * index * (Math.PI / 180)) * height / 2);
+    let setY = (height / 2) + (Math.sin(degree * index * (Math.PI / 180)) * height / 2) - 100;
 
     return { degree, setX, setY };
   }
@@ -53,48 +106,48 @@ export default class Clockface extends Component {
 
   render() {
     const { timer, width, height } = this.props;
+    const { dial } = this.state;
+
     return (
       <Stage width={width} height={height}>
         <Layer>
           <Group ref={'dial'}>
-            {[...Array(16).keys()].map((_, index) => {
-              const { degree, setX, setY } = this.setCoordinates(index);
-
-              return <Rect
+            {dial.map((division, index) => 
+              <Rect
                 key={index}
-                name={'' + index}
 
                 cornerRadius={8}
                 fill={'#f5f5f5'}
-                opacity={0.06 * index + 0.1}
+                opacity={division.opacity}
 
-                x={setX}
-                y={setY}
-                width={20}
-                height={index % 5 ? 60 : 80}
-                rotation={(degree * index) - 90}
+                x={division.x}
+                y={division.x}
+                width={division.width}
+                height={division.height}
+
+                rotation={division.rotation}
                 offset={{
                   x: 10,
                   y: index % 5 ? 30 : 40
                 }}
               />
-            })}
+            )}
           </Group>
         </Layer>
         <Layer>
           <Text
             fontFamily={'Roboto'}
-            fontSize={120}
+            fontSize={128}
             fontStyle={'bold'}
 
             text={this.updateTimer(timer)}
             align={'center'}
             fill={'#f5f5f5'}
 
-            x={width / 2 - 200}
-            y={height / 2 - 60}
-            width={400}
-            height={120}
+            x={width / 2 - 256}
+            y={height / 2 - 64}
+            width={512}
+            height={128}
           />
         </Layer>
       </Stage>
