@@ -1,6 +1,6 @@
 {
   "name": "pomodoro-timer",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Pomodoro timer for developers",
   "main": "webpack.config.js",
   "homepage": "https://therapy.github.io/pomodoro",
