@@ -6,7 +6,7 @@
   - [x] each component in a separate folder
   - [x] styles next to the component
 - [ ] js
-  - [ ] animation dial
+  - [x] animation dial
     - [x] dial in canvas
   - [ ] controls
   - [ ] configurable time

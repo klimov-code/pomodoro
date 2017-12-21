@@ -11,10 +11,12 @@ export default class Timer extends Component {
   }
 
   render() {
+    const { toggleTimer, resetTimer, play } = this.props;
+
     return (
       <div>
-        <button type='button' onClick={this.props.toggleTimer}>{this.props.play ? 'pause' : 'play'}</button>
-        <button type='button' onClick={this.props.resetTimer}>reset</button>
+        <button type='button' onClick={toggleTimer}>{play ? 'pause' : 'play'}</button>
+        <button type='button' onClick={resetTimer}>reset</button>
       </div>
     );
   }

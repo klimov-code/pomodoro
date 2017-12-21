@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Title from './components/Title';
-import Header from './components/Header';
-import Clockface from './components/Clockface'
-import Controls from './components/Controls'
-import Footer from './components/Footer';
+import Title from './Title';
+import Header from './Header';
+import Clockface from './Clockface'
+import Controls from './Controls'
+import Footer from './Footer';
+
+import './index.scss';
 
 export default class Pomodoro extends Component {
   
@@ -19,22 +21,13 @@ export default class Pomodoro extends Component {
   state = {
     play: false,
     time: 0,
+    dial: [],
     mode: '',
     pomodoroCount: 0,
     breakCount: 0
   }
 
-  setInitialState() {
-    this.setState({
-      play: false,
-      time: 15,
-      mode: 'work',
-      pomodoroCount: 0,
-      breakCount: 0
-    });
-  }
-
-  componentDidMount() {
+  componentWillMount() {
     this.setInitialState();
     this.getLocalStorage();
   }
@@ -44,32 +37,58 @@ export default class Pomodoro extends Component {
     this.setLocalStorage();
   }
 
-  
+  setInitialState() {
+    this.setState({
+      play: false,
+      time: 1500,
+      dial: [...Array(15)].map((_, index) => {
+        const { degree, setX, setY } = this.getCoordinates(index);
+
+        return {
+          opacity: 0.06 * index + 0.1,
+          x: setX,
+          y: setY,
+          rotation: degree * index - 90
+        }
+      }),
+      mode: 'work',
+      pomodoroCount: 0,
+      breakCount: 0
+    });
+  }
+
   tick() {
-    let mode = this.state.mode,
-        time = this.state.time,
-        pomodoroCount = this.state.pomodoroCount;
-    
+    let { time, mode, pomodoroCount } = this.state;
+
     if (time > 0) {
       this.setState(prevState => ({
-        time: prevState.time - 1
+        time: prevState.time - 1,
+        dial: this.moveDial(prevState.dial)
       }));
-    } else if (mode === 'work' && (pomodoroCount%3 !== 0 || pomodoroCount === 0)) {
-      this.changeModeState(3, 'break');
-    } else if (mode === 'work' && pomodoroCount%3 === 0) {
-      this.changeModeState(9, 'break');
+    } else if (mode === 'work' && (pomodoroCount % 3 !== 0 || pomodoroCount === 0)) {
+      this.toggleMode(300, 'break');
+    } else if (mode === 'work' && pomodoroCount % 3 === 0) {
+      this.toggleMode(900, 'break');
       console.info('%cYou worked hard, go get some rest and have a cup of coffee', 'color: blue');
     } else {
-      this.changeModeState(15, 'work');
+      this.toggleMode(1500, 'work');
     }
   }
+
+  moveDial(dial) {
+    const firstElement = dial.shift();
+
+    return dial.slice(firstElement.length - dial.length).concat(firstElement);
+  }
   
-  changeModeState(time, mode) {
+  toggleMode(time, mode) {
     this.pauseTimer();
-    this.setState(prevState => ({
+
+    this.setState({
       time: time,
-      mode: mode,
-    }));
+      mode: mode
+    });
+
     if (mode === 'break') {
       this.setState(prevState => ({
         pomodoroCount: prevState.pomodoroCount + 1
@@ -81,6 +100,15 @@ export default class Pomodoro extends Component {
       }));
       console.info('%cBreak Count: ' + this.state.breakCount, 'color: green');
     }
+  }
+
+  getCoordinates(index) {
+    const { width, height } = this.props;
+    let degree = 6;
+    let setX = (width / 2) + (Math.cos(degree * index * (Math.PI / 180)) * height / 2);
+    let setY = (height / 2) + (Math.sin(degree * index * (Math.PI / 180)) * height / 2) - 100;
+
+    return { degree, setX, setY };
   }
   
   startTimer() {
@@ -101,7 +129,9 @@ export default class Pomodoro extends Component {
   }
 
   toggleTimer() {
-    if (this.state.play) {
+    const { play } = this.state;
+
+    if (play) {
       this.pauseTimer();
     } else {
       this.startTimer();
@@ -110,30 +140,34 @@ export default class Pomodoro extends Component {
 
   resetTimer() {
     this.pauseTimer();
-    this.setInitialState();
     this.resetLocalStorage();
+    this.setInitialState();
   }
-  
+
   formatTime(seconds) {
     const format = (number) => (number > 9) ? number : '0' + number;
     
     return `${format(Math.floor(seconds / 60 % 60))}:${format(Math.floor(seconds % 60))}`;
   }
-  
+
   getTitle() {
-    return `(${this.formatTime(this.state.time)}) Pomodoro Timer - time management method`;
+    const { time } = this.state;
+
+    return `(${this.formatTime(time)}) Pomodoro Timer - time management method`;
   }
-  
+
   getTime() {
-    return this.formatTime(this.state.time);
+    const { time } = this.state;
+
+    return this.formatTime(time);
   }
 
   setLocalStorage() {
-    window.localStorage.setItem('pomodoroState', JSON.stringify(this.state));
+    localStorage.setItem('pomodoroState', JSON.stringify(this.state));
   }
 
   getLocalStorage() {
-    const restoreStateString = window.localStorage.getItem('pomodoroState');
+    const restoreStateString = localStorage.getItem('pomodoroState');
     if (restoreStateString) {
       const restoreState = JSON.parse(restoreStateString);
       this.setState(restoreState);
@@ -141,17 +175,18 @@ export default class Pomodoro extends Component {
   }
 
   resetLocalStorage() {
-    window.localStorage.removeItem('pomodoroState');
+    localStorage.removeItem('pomodoroState');
   }
 
   render() {
-    const { play } = this.state;
+    const { width, height } = this.props;
+    const { play, dial } = this.state;
 
     return(
       <div>
         <Title title={this.getTitle} />
         <Header />
-        <Clockface timer={this.getTime} width={1000} height={700} play={play} />
+        <Clockface timer={this.getTime} width={width} height={height} dial={dial} play={play} />
         <Controls toggleTimer={this.toggleTimer} resetTimer={this.resetTimer} play={play} />
         <Footer />
       </div>
