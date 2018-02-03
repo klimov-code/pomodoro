@@ -1,0 +1,105 @@
+$bg-main-button: #FF6347;
+$base-size: 1em;
+
+.controls {
+  align-self: center;
+
+  grid-area: controls;
+  justify-self: center;
+
+  &__button {
+    margin-right: 25px;
+    padding: $base-size;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: #EEE;
+
+    font-size: $base-size * 1.25;
+
+    & .play {
+      position: relative;
+
+      display: block;
+      overflow: hidden;
+
+      width: $base-size * 1.5;
+      height: $base-size * 1.5;
+
+      & .left,
+      & .right {
+        width: 33%;
+        height: 100%;
+
+        transition: all .3s ease;
+
+        background-color: #FFF;
+      }
+
+      & .left {
+        float: left;
+        overflow: hidden;
+      }
+
+      & .right {
+        float: right;
+      }
+
+      & .triangle-1 {
+        transform: translateY(-100%);
+      }
+
+      & .triangle-2 {
+        transform: translateY(100%);
+      }
+
+      & .triangle-1,
+      & .triangle-2 {
+        position: absolute;
+        top: 0;
+        right: 0;
+
+        width: 0;
+        height: 0;
+
+        transition: transform .3s ease;
+
+        border-top: ($base-size * .75) solid transparent;
+        border-right: ($base-size * 1.5) solid $bg-main-button;
+        border-bottom: ($base-size * .75) solid transparent;
+        background-color: transparent;
+      }
+    }
+
+    & .pause {
+      & .left,
+      & .right {
+        width: 50%;
+      }
+
+      & .triangle-1 {
+        transform: translateY(-50%);
+      }
+
+      & .triangle-2 {
+        transform: translateY(50%);
+      }
+    }
+
+    &:nth-child(2) {
+      padding: $base-size * 1.25;
+
+      background-color: $bg-main-button;
+    }
+
+    &[disabled] {
+      cursor: not-allowed;
+
+      color: #BBB;
+    }
+  }
+}

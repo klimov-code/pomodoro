@@ -62,6 +62,7 @@ module.exports = {
     rules: [
       {
         test: /\.(jsx?|mjs)$/,
+        include: paths.appSrc,
         enforce: 'pre',
         use: [
           {
@@ -73,7 +74,6 @@ module.exports = {
             loader: require.resolve('eslint-loader'),
           },
         ],
-        include: paths.appSrc,
       },
       {
         oneOf: [
@@ -81,16 +81,32 @@ module.exports = {
             test: [/\.bmp$/, /\.gif$/, /\.jpe?g$/, /\.png$/],
             loader: require.resolve('url-loader'),
             options: {
-              limit: 10000,
+              limit: 25000,
               name: 'static/media/[name].[hash:8].[ext]',
             },
+          },
+          {
+            test: /Flaticon\.\w+/,
+            loader: require.resolve('file-loader'),
+            options: {
+              limit: 15000,
+              name: 'static/media/icons/[name].[hash:8].[ext]'
+            }
+          },
+          {
+            test: /\.woff2?(\?v=\d+\.\d+\.\d+)?$/,
+            loader: require.resolve('file-loader'),
+            options: {
+              limit: 25000,
+              mimetype: "application/font-woff",
+              name: 'static/media/fonts/[name].[hash:8].[ext]',
+            }
           },
           {
             test: /\.(jsx?|mjs)$/,
             include: paths.appSrc,
             loader: require.resolve('babel-loader'),
             options: {
-              
               compact: true,
             },
           },
@@ -118,6 +134,7 @@ module.exports = {
                       loader: require.resolve('postcss-loader'),
                       options: {
                         ident: 'postcss',
+                        sourceMap: shouldUseSourceMap,
                         plugins: () => [
                           require('postcss-flexbugs-fixes'),
                           autoprefixer({
@@ -136,7 +153,7 @@ module.exports = {
                       loader: require.resolve('sass-loader'),
                       options: {
                         sourceMap: shouldUseSourceMap,
-                      },
+                      }
                     },
                   ],
                 },
@@ -220,4 +237,7 @@ module.exports = {
     tls: 'empty',
     child_process: 'empty',
   },
+  performance: {
+    hints: 'warning'
+  }
 };

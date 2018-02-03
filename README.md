@@ -8,18 +8,17 @@
 - [ ] js
   - [x] animation dial
     - [x] dial in canvas
-  - [ ] controls
+  - [x] controls
   - [ ] configurable time
     - [ ] constraints (for example -> work > break)
   - [ ] update timer font immediately (with an open console is no font loading)
 - [ ] css
   - [ ] adaptability
-  - [ ] component styles
-    - [ ] header
-    - [ ] clockface
-      - [ ] animation dial
-    - [ ] controls
-    - [ ] footer
+  - [x] component styles
+    - [x] header
+    - [x] clockface
+    - [x] controls
+    - [x] footer
 - [ ] audio notification
   - [ ] several different audios
   - [ ] select audio
@@ -31,3 +30,4 @@
 - [x] sass support in webpack
 - [ ] tests
 - [ ] synchronize timers in the header and on the page
+- [ ] add redux

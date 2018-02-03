@@ -1,0 +1,77 @@
+  /*
+  Flaticon icon font: Flaticon
+  Creation date: 29/01/2018 11:51
+
+  modified by therapy
+  */
+
+@font-face {
+  font-family: 'Flaticon';
+  font-weight: normal;
+  font-style: normal;
+
+  src: url('./icons/Flaticon.eot');
+  src: url('./icons/Flaticon.eot?#iefix') format('embedded-opentype'),
+  url('./icons/Flaticon.woff') format('woff'),
+  url('./icons/Flaticon.ttf') format('truetype'),
+  url('./icons/Flaticon.svg#Flaticon') format('svg');
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+  @font-face {
+    font-family: 'Flaticon';
+
+    src: url('./icons/Flaticon.svg#Flaticon') format('svg');
+  }
+}
+
+.fi {
+  transition: all .5s cubic-bezier(.455, .03, .515, .955);
+
+  &:before {
+    display: inline-block;
+
+    padding: 0 .085em;
+
+    text-align: center;
+    text-decoration: inherit;
+    text-transform: none;
+
+    font-family: 'Flaticon';
+    font-weight: normal;
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+
+    font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  &-telegram:before {
+    content: '\f100';
+  }
+
+  &-settings:before {
+    content: '\f101';
+  }
+
+  &-stop:before {
+    content: '\f102';
+  }
+
+  &-heart:before {
+    content: '\f103';
+  }
+
+  &-code:before {
+    content: '\f104';
+  }
+
+  &-github:before {
+    content: '\f105';
+  }
+
+  &-skip:before {
+    content: '\f106';
+  }
+}
