@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 
 import Title from './Title';
 import Header from './Header';
-import Clockface from './Clockface'
-import Controls from './Controls'
+import Controls from './Controls';
+import Settings from './Settings';
+import Clockface from './Clockface';
 import Footer from './Footer';
 
 import './index.scss';
@@ -15,6 +16,8 @@ export default class Pomodoro extends Component {
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
     this.skipTimer = this.skipTimer.bind(this);
+    this.handleWorkTime = this.handleWorkTime.bind(this);
+    this.handleRestTime = this.handleRestTime.bind(this);
   }
 
   state = {
@@ -74,7 +77,7 @@ export default class Pomodoro extends Component {
   }
 
   tick() {
-    let { currentTime } = this.state;
+    const { currentTime } = this.state;
 
     if (currentTime > 0) {
       this.setState(prevState => ({
@@ -100,11 +103,16 @@ export default class Pomodoro extends Component {
       workTime,
       restTime,
       mode,
-      workCount
+      workCount,
+      restCount
     } = this.state;
-    const nextTime = (mode === 'work' && (workCount % 3 !== 0 || workCount === 0))
+
+    const nextWorkCount = workCount + 1,
+      nextRestCount = restCount + 1;
+
+    const nextCurrentTime = (mode === 'work' && nextWorkCount % 4)
       ? restTime
-      : (mode === 'work' && (workCount % 3 === 0))
+      : (mode === 'work' && (nextWorkCount % 4 === 0))
         ? restTime * 3
         : workTime;
     const nextMode = (mode === 'rest') ? 'work' : 'rest';
@@ -113,16 +121,16 @@ export default class Pomodoro extends Component {
       this.setState(prevState => ({
         workCount: prevState.workCount + 1
       }));
-      // console.info('%cPomodoro Count: ' + (workCount + 1), 'color: tomato');
+      console.info('%cPomodoro Count: ' + nextWorkCount, 'color: tomato');
     } else {
       this.setState(prevState => ({
         restCount: prevState.restCount + 1
       }));
-      // console.info('%cRest Count: ' + (restCount + 1), 'color: green');
+      console.info('%cRest Count: ' + nextRestCount, 'color: green');
     }
 
     this.setState({
-      currentTime: nextTime,
+      currentTime: nextCurrentTime,
       mode: nextMode,
       fill: 0
     });
@@ -174,14 +182,32 @@ export default class Pomodoro extends Component {
     this.switchMode();
   }
 
-  handleState(time, rest) {
-    if (rest) {
+  handleWorkTime(minutes) {
+    const { mode } = this.state;
+
+    if (mode === 'work') {
       this.setState({
-        restTime: time
+        workTime: minutes * 60,
+        currentTime: minutes * 60
       });
     } else {
       this.setState({
-        workTime: time
+        workTime: minutes * 60
+      });
+    }
+  }
+
+  handleRestTime(minutes) {
+    const { mode } = this.state;
+
+    if (mode === 'rest') {
+      this.setState({
+        restTime: minutes * 60,
+        currentTime: minutes * 60
+      });
+    } else {
+      this.setState({
+        restTime: minutes * 60
       });
     }
   }
@@ -202,12 +228,14 @@ export default class Pomodoro extends Component {
       currentTime,
       dial,
       mode,
+      workCount,
       fill
     } = this.state;
+
     const { width, height } = this.props;
 
     return (
-      <div className='wrapper'>
+      <main className='wrapper'>
         <Title
           currentTime={currentTime}
         />
@@ -218,6 +246,13 @@ export default class Pomodoro extends Component {
           skipTimer={this.skipTimer}
           play={play}
         />
+        <Settings
+          handleWorkTime={this.handleWorkTime}
+          handleRestTime={this.handleRestTime}
+          play={play}
+          workTime={workTime}
+          restTime={restTime}
+        />
         <Clockface
           width={width}
           height={height}
@@ -227,10 +262,11 @@ export default class Pomodoro extends Component {
           currentTime={currentTime}
           dial={dial}
           mode={mode}
+          workCount={workCount}
           fill={fill}
         />
         <Footer />
-      </div>
+      </main>
     );
   }
 }

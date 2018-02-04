@@ -21,7 +21,8 @@ export default class Clockface extends Component {
     currentTime: number,
     dial: arrayOf(object),
     mode: string,
-    fill: number,
+    workCount: number,
+    fill: number
   }
 
   componentWillMount() {
@@ -75,11 +76,19 @@ export default class Clockface extends Component {
       currentTime,
       dial,
       mode,
+      workCount,
       fill
     } = this.props;
-    const fullTime = (mode === 'rest') ? restTime : workTime;
+
+    const fullTime = (mode === 'rest' && workCount % 4)
+      ? restTime
+      : (mode === 'rest' && workCount % 4 === 0)
+        ? restTime * 3
+        : workTime;
+
     const time = formatTime(currentTime);
     const timePercent = formatTimePercent(fullTime, currentTime);
+
     const currentColor = this.gradientSteps[fill];
 
     return (

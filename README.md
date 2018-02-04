@@ -5,13 +5,12 @@
 - [x] folder structure
   - [x] each component in a separate folder
   - [x] styles next to the component
-- [ ] js
+- [x] js
   - [x] animation dial
     - [x] dial in canvas
   - [x] controls
-  - [ ] configurable time
-    - [ ] constraints (for example -> work > break)
-  - [ ] update timer font immediately (with an open console is no font loading)
+  - [x] configurable time
+    - [x] constraints (for example -> work > break)
 - [ ] css
   - [ ] adaptability
   - [x] component styles
@@ -23,7 +22,7 @@
   - [ ] several different audios
   - [ ] select audio
   - [ ] volume control
-- [ ] favicon
+- [x] favicon
 - [ ] localization
 - [ ] social networks
 - [ ] pugjs support in react and webpack
@@ -31,3 +30,5 @@
 - [ ] tests
 - [ ] synchronize timers in the header and on the page
 - [ ] add redux
+- [ ] add webfonts
+  - [ ] update timer font immediately
