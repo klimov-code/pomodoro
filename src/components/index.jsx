@@ -110,12 +110,12 @@ export default class Pomodoro extends Component {
     const nextWorkCount = workCount + 1,
       nextRestCount = restCount + 1;
 
-    const nextCurrentTime = (mode === 'work' && nextWorkCount % 4)
+    const nextMode = (mode === 'rest') ? 'work' : 'rest';
+    const nextCurrentTime = (nextMode === 'rest' && nextWorkCount % 4)
       ? restTime
-      : (mode === 'work' && (nextWorkCount % 4 === 0))
+      : (nextMode === 'rest' && (nextWorkCount % 4 === 0))
         ? restTime * 3
         : workTime;
-    const nextMode = (mode === 'rest') ? 'work' : 'rest';
 
     if (nextMode === 'rest') {
       this.setState(prevState => ({
@@ -250,8 +250,6 @@ export default class Pomodoro extends Component {
           handleWorkTime={this.handleWorkTime}
           handleRestTime={this.handleRestTime}
           play={play}
-          workTime={workTime}
-          restTime={restTime}
         />
         <Clockface
           width={width}

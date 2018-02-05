@@ -1,27 +1,44 @@
 import React, { Component } from 'react';
-import { func, bool, number } from 'prop-types';
+import { func, bool } from 'prop-types';
 
 import './index.scss';
 
 export default class Settings extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      workTime: 25,
+      restTime: 5
+    }
+  }
+
   static propTypes = {
     handleWorkTime: func,
     handleRestTime: func,
-    play: bool,
-    workTime: number,
-    restTime: number
+    play: bool
+  }
+
+  changeWorkTime(time) {
+    const { handleWorkTime } = this.props;
+
+    this.setState({
+      workTime: time
+    });
+    handleWorkTime(time);
+  }
+
+  changeRestTime(time) {
+    const { handleRestTime } = this.props;
+
+    this.setState({
+      restTime: time
+    });
+    handleRestTime(time);
   }
 
   render() {
-    const {
-      handleWorkTime,
-      handleRestTime,
-      play,
-      workTime,
-      restTime
-    } = this.props;
-    const workMins = workTime / 60,
-      restMins = restTime / 60;
+    const { play } = this.props;
+    const { workTime, restTime } = this.state;
 
     return (
       <section className='settings'>
@@ -32,30 +49,30 @@ export default class Settings extends Component {
           </div>
           <div className='settings__options'>
             <div className='options'>
-              <label className='options__label' htmlFor='work'>Work time: {workMins} minutes</label>
+              <label className='options__label' htmlFor='work'>Work time: {workTime} minutes</label>
               <input
                 className='options__range'
                 type='range'
                 id='work'
                 min={25}
                 max={75}
-                value={workMins}
-                onBlur={(e) => handleWorkTime(e.target.value)}
-                onChange={(e) => handleWorkTime(e.target.value)}
+                value={workTime}
+                onBlur={(e) => this.changeWorkTime(e.target.value)}
+                onChange={(e) => this.changeWorkTime(e.target.value)}
                 disabled={play}
               />
             </div>
             <div className='options'>
-              <label className='options__label' htmlFor='rest'>Rest time: {restMins} minutes</label>
+              <label className='options__label' htmlFor='rest'>Rest time: {restTime} minutes</label>
               <input
                 className='options__range'
                 type='range'
                 id='rest'
                 min={5}
                 max={15}
-                value={restMins}
-                onBlur={(e) => handleRestTime(e.target.value)}
-                onChange={(e) => handleRestTime(e.target.value)}
+                value={restTime}
+                onBlur={(e) => this.changeRestTime(e.target.value)}
+                onChange={(e) => this.changeRestTime(e.target.value)}
                 disabled={play}
               />
             </div>

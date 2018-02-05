@@ -1,0 +1,16 @@
+.settings {
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 25%;
+  &__form {
+    padding: 20px;
+    border: 1px solid black;
+  }
+}
+
+.options {
+  &__label {
+    display: block;
+  }
+}

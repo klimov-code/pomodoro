@@ -26,18 +26,12 @@ export default class Clockface extends Component {
   }
 
   componentWillMount() {
-    const { currentTime, mode } = this.props;
-    const reverse = mode === 'rest';
-
-    this.gradientSteps = createGradientSteps('#ff6347', '#2ecc71', currentTime, reverse);
+    this.updateGradient();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { currentTime, mode } = nextProps;
-
-    if (mode !== this.props.mode) {
-      const reverse = mode === 'rest';
-      this.gradientSteps = createGradientSteps('#ff6347', '#2ecc71', currentTime, reverse);
+    if (nextProps.mode !== this.props.mode) {
+      this.updateGradient(nextProps);
     }
   }
 
@@ -65,6 +59,16 @@ export default class Clockface extends Component {
 
   componentWillUnmount() {
     delete this.gradientSteps;
+  }
+
+  updateGradient(props = this.props) {
+    const {
+      currentTime,
+      mode
+    } = props;
+    const reverse = mode === 'rest';
+    
+    this.gradientSteps = createGradientSteps('#ff6347', '#2ecc71', currentTime, reverse);
   }
 
   render() {

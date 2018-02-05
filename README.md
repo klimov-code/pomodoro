@@ -17,11 +17,11 @@
     - [x] header
     - [x] clockface
     - [x] controls
+    - [ ] settings
     - [x] footer
 - [ ] audio notification
   - [ ] several different audios
   - [ ] select audio
-  - [ ] volume control
 - [x] favicon
 - [ ] localization
 - [ ] social networks
