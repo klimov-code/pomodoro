@@ -1,6 +1,6 @@
 {
   "name": "pomodoro-timer",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Pomodoro timer - time management method",
   "main": "./src/index.js",
   "homepage": "https://therapy.github.io/pomodoro",
