@@ -5,7 +5,9 @@ import './index.scss';
 export default class Footer extends Component {
   render() {
     return (
-      <footer className='footer'>made with love by therapy</footer>
+      <footer className='footer'>
+        <div className='footer__copyright'>made with love by therapy</div>
+      </footer>
     );
   }
 }

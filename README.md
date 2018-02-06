@@ -17,7 +17,7 @@
     - [x] header
     - [x] clockface
     - [x] controls
-    - [ ] settings
+    - [x] settings
     - [x] footer
 - [ ] audio notification
   - [ ] several different audios
@@ -30,5 +30,5 @@
 - [ ] tests
 - [ ] synchronize timers in the header and on the page
 - [ ] add redux
-- [ ] add webfonts
-  - [ ] update timer font immediately
+- [x] add webfonts
+  - [x] update timer font immediately

@@ -10,6 +10,9 @@ export default class Settings extends Component {
       workTime: 25,
       restTime: 5
     }
+    this.changeWorkTime = this.changeWorkTime.bind(this);
+    this.changeRestTime = this.changeRestTime.bind(this);
+    this.handleSettingsTab = this.handleSettingsTab.bind(this);
   }
 
   static propTypes = {
@@ -36,6 +39,14 @@ export default class Settings extends Component {
     handleRestTime(time);
   }
 
+  handleSettingsTab(e) {
+    e.preventDefault();
+
+    const settings = document.querySelector('.settings');
+
+    settings.classList.toggle('hide');
+  }
+
   render() {
     const { workTime, restTime } = this.state;
     const { play } = this.props;
@@ -44,7 +55,7 @@ export default class Settings extends Component {
       <section className='settings hide'>
         <form className='settings__form'>
           <div className='settings__header'>
-            <button className='settings__button--close'>close</button>
+            <button className='settings__button--close' onClick={this.handleSettingsTab}>close</button>
             <h3 className='settings__title'>settings</h3>
           </div>
           <div className='settings__options'>
