@@ -1,7 +1,6 @@
-$base-tomato-color: #ff6347;
-$base-green-color: #2ecc71;
-$base-bg-color: #eeeeee;
-
+$base-tomato-color: #FF6347;
+$base-green-color: #2ECC71;
+$base-bg-color: #EEE;
 $base-size: 1em;
 
 .controls {
@@ -9,6 +8,8 @@ $base-size: 1em;
 
   grid-area: controls;
   justify-self: center;
+
+  transition: all .3s cubic-bezier(.455, .03, .515, .955);
   &__button {
     margin-right: 25px;
     padding: $base-size;
@@ -37,7 +38,7 @@ $base-size: 1em;
 
         transition: all .3s ease;
 
-        background-color: #FFFFFF;
+        background-color: #FFF;
       }
       & .left {
         float: left;

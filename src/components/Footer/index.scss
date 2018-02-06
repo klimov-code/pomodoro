@@ -1,12 +1,15 @@
 .footer {
+  align-self: center;
+  justify-content: center;
+
   width: 100%;
   height: 100px;
   min-height: 50px;
-  align-self: center;
-  justify-content: center;
+
   grid-area: footer;
   &__copyright {
     text-align: center;
+
     line-height: 100px;
   }
 }
