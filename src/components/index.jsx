@@ -182,32 +182,32 @@ export default class Pomodoro extends Component {
     this.switchMode();
   }
 
-  handleWorkTime(minutes) {
+  handleWorkTime(time) {
     const { mode } = this.state;
 
     if (mode === 'work') {
       this.setState({
-        workTime: minutes * 60,
-        currentTime: minutes * 60
+        workTime: time * 60,
+        currentTime: time * 60
       });
     } else {
       this.setState({
-        workTime: minutes * 60
+        workTime: time * 60
       });
     }
   }
 
-  handleRestTime(minutes) {
+  handleRestTime(time) {
     const { mode } = this.state;
 
     if (mode === 'rest') {
       this.setState({
-        restTime: minutes * 60,
-        currentTime: minutes * 60
+        restTime: time * 60,
+        currentTime: time * 60
       });
     } else {
       this.setState({
-        restTime: minutes * 60
+        restTime: time * 60
       });
     }
   }

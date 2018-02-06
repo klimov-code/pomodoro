@@ -1,4 +1,7 @@
-$bg-main-button: #FF6347;
+$base-tomato-color: #ff6347;
+$base-green-color: #2ecc71;
+$base-bg-color: #eeeeee;
+
 $base-size: 1em;
 
 .controls {
@@ -6,7 +9,6 @@ $base-size: 1em;
 
   grid-area: controls;
   justify-self: center;
-
   &__button {
     margin-right: 25px;
     padding: $base-size;
@@ -17,10 +19,9 @@ $base-size: 1em;
     border: none;
     border-radius: 50%;
     outline: none;
-    background-color: #EEE;
+    background-color: $base-bg-color;
 
     font-size: $base-size * 1.25;
-
     & .play {
       position: relative;
 
@@ -29,7 +30,6 @@ $base-size: 1em;
 
       width: $base-size * 1.5;
       height: $base-size * 1.5;
-
       & .left,
       & .right {
         width: 33%;
@@ -37,26 +37,21 @@ $base-size: 1em;
 
         transition: all .3s ease;
 
-        background-color: #FFF;
+        background-color: #FFFFFF;
       }
-
       & .left {
         float: left;
         overflow: hidden;
       }
-
       & .right {
         float: right;
       }
-
       & .triangle-1 {
         transform: translateY(-100%);
       }
-
       & .triangle-2 {
         transform: translateY(100%);
       }
-
       & .triangle-1,
       & .triangle-2 {
         position: absolute;
@@ -69,37 +64,32 @@ $base-size: 1em;
         transition: transform .3s ease;
 
         border-top: ($base-size * .75) solid transparent;
-        border-right: ($base-size * 1.5) solid $bg-main-button;
+        border-right: ($base-size * 1.5) solid $base-tomato-color;
         border-bottom: ($base-size * .75) solid transparent;
         background-color: transparent;
       }
     }
-
     & .pause {
       & .left,
       & .right {
         width: 50%;
       }
-
       & .triangle-1 {
         transform: translateY(-50%);
       }
-
       & .triangle-2 {
         transform: translateY(50%);
       }
     }
-
     &:nth-child(2) {
       padding: $base-size * 1.25;
 
-      background-color: $bg-main-button;
+      background-color: $base-tomato-color;
     }
-
     &[disabled] {
       cursor: not-allowed;
 
-      color: #BBB;
+      color: $base-bg-color;
     }
   }
 }

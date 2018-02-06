@@ -11,6 +11,12 @@ export default class Controls extends Component {
     play: bool
   }
 
+  handleClick() {
+    const settings = document.querySelector('.settings');
+
+    settings.classList.toggle('hide');
+  }
+
   render() {
     const {
       toggleTimer,
@@ -31,7 +37,7 @@ export default class Controls extends Component {
           </i>
         </button>
         <button className='controls__button fi fi-skip' type='button' onClick={skipTimer} />
-        <button className='controls__button fi fi-settings' type='button' disabled={play} />
+        <button className='controls__button fi fi-settings' type='button' onClick={this.handleClick}  disabled={play} />
       </section>
     );
   }
