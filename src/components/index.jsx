@@ -48,6 +48,7 @@ export default class Pomodoro extends Component {
   setInitialState(initialState = undefined) {
     if (initialState) {
       const state = JSON.parse(initialState);
+
       this.setState({
         ...state,
         play: false
@@ -188,11 +189,13 @@ export default class Pomodoro extends Component {
     if (mode === 'work') {
       this.setState({
         workTime: time * 60,
-        currentTime: time * 60
+        currentTime: time * 60,
+        fill: 0
       });
     } else {
       this.setState({
-        workTime: time * 60
+        workTime: time * 60,
+        fill: 0
       });
     }
   }
@@ -203,11 +206,13 @@ export default class Pomodoro extends Component {
     if (mode === 'rest') {
       this.setState({
         restTime: time * 60,
-        currentTime: time * 60
+        currentTime: time * 60,
+        fill: 0
       });
     } else {
       this.setState({
-        restTime: time * 60
+        restTime: time * 60,
+        fill: 0
       });
     }
   }

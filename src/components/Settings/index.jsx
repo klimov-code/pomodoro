@@ -68,6 +68,7 @@ export default class Settings extends Component {
                 max={75}
                 value={workTime}
                 onBlur={(e) => this.changeWorkTime(e.target.value)}
+                onFocus={(e) => this.changeWorkTime(e.target.value)}
                 onChange={(e) => this.changeWorkTime(e.target.value)}
                 disabled={play}
               />
@@ -83,6 +84,7 @@ export default class Settings extends Component {
                 max={15}
                 value={restTime}
                 onBlur={(e) => this.changeRestTime(e.target.value)}
+                onFocus={(e) => this.changeRestTime(e.target.value)}
                 onChange={(e) => this.changeRestTime(e.target.value)}
                 disabled={play}
               />

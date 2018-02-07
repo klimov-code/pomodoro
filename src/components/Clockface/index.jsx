@@ -30,8 +30,15 @@ export default class Clockface extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.mode !== this.props.mode) {
-      this.updateGradient(nextProps);
+    const {
+      workTime,
+      restTime,
+      mode,
+      workCount
+    } = nextProps;
+
+    if (mode !== this.props.mode) {
+      this.updateGradient({ workTime, restTime, mode, workCount });
     }
   }
 
@@ -61,34 +68,47 @@ export default class Clockface extends Component {
     delete this.gradientSteps;
   }
 
-  updateGradient(props = this.props) {
+  updateGradient(props = undefined) {
     const {
-      currentTime,
-      mode
-    } = props;
-    const reverse = mode === 'rest';
-    
-    this.gradientSteps = createGradientSteps('#ff6347', '#2ecc71', currentTime, reverse);
-  }
-
-  render() {
-    const {
-      width,
-      height,
       workTime,
       restTime,
-      currentTime,
-      dial,
       mode,
-      workCount,
-      fill
-    } = this.props;
+      workCount
+    } = props || this.props;
+
+    const reverse = mode === 'rest';
+    const fullTime = this.getFullTime({ workTime, restTime, mode, workCount });
+    
+    this.gradientSteps = createGradientSteps('#ff6347', '#2ecc71', fullTime, reverse);
+  }
+
+  getFullTime(props) {
+    const {
+      workTime,
+      restTime,
+      mode,
+      workCount
+    } = props || this.props;
 
     const fullTime = (mode === 'rest' && workCount % 4)
       ? restTime
       : (mode === 'rest' && workCount % 4 === 0)
         ? restTime * 3
         : workTime;
+
+    return fullTime;
+  }
+
+  render() {
+    const {
+      width,
+      height,
+      currentTime,
+      dial,
+      fill
+    } = this.props;
+
+    const fullTime = this.getFullTime();
 
     const time = formatTime(currentTime);
     const timePercent = formatTimePercent(fullTime, currentTime);

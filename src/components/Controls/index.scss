@@ -9,7 +9,6 @@ $base-size: 1em;
   grid-area: controls;
   justify-self: center;
 
-  transition: all .3s cubic-bezier(.455, .03, .515, .955);
   &__button {
     margin-right: 25px;
     padding: $base-size;
@@ -23,6 +22,7 @@ $base-size: 1em;
     background-color: $base-bg-color;
 
     font-size: $base-size * 1.25;
+    transition: all .5s cubic-bezier(.455, .03, .515, .955);
     & .play {
       position: relative;
 
