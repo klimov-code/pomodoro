@@ -45,7 +45,7 @@ export default class Pomodoro extends Component {
     clearInterval(this.countdown);
   }
 
-  setInitialState(initialState = undefined) {
+  setInitialState(initialState) {
     if (initialState) {
       const state = JSON.parse(initialState);
 
@@ -188,16 +188,13 @@ export default class Pomodoro extends Component {
 
     if (mode === 'work') {
       this.setState({
-        workTime: time * 60,
-        currentTime: time * 60,
-        fill: 0
-      });
-    } else {
-      this.setState({
-        workTime: time * 60,
-        fill: 0
+        currentTime: time * 60
       });
     }
+    this.setState({
+      workTime: time * 60,
+      fill: 0
+    });
   }
 
   handleRestTime(time) {
@@ -205,16 +202,13 @@ export default class Pomodoro extends Component {
 
     if (mode === 'rest') {
       this.setState({
-        restTime: time * 60,
-        currentTime: time * 60,
-        fill: 0
-      });
-    } else {
-      this.setState({
-        restTime: time * 60,
-        fill: 0
+        currentTime: time * 60
       });
     }
+    this.setState({
+      restTime: time * 60,
+      fill: 0
+    });
   }
 
   setLocalStorage() {

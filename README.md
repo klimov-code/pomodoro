@@ -31,4 +31,4 @@
 - [ ] synchronize timers in the header and on the page
 - [ ] add redux
 - [x] add webfonts
-  - [x] update timer font immediately
+  - [ ] update timer font immediately

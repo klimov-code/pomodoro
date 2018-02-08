@@ -68,7 +68,7 @@ export default class Clockface extends Component {
     delete this.gradientSteps;
   }
 
-  updateGradient(props = undefined) {
+  updateGradient(props) {
     const {
       workTime,
       restTime,
@@ -132,7 +132,7 @@ export default class Clockface extends Component {
             timePercent={timePercent}
             currentColor={currentColor}
             x={width / 4}
-            y={height / 2 + 200}
+            y={height / 2 + 150}
           />
         </Layer>
       </Stage>

@@ -5,5 +5,5 @@ import registerServiceWorker from './registerServiceWorker';
 
 import './index.scss';
 
-ReactDOM.render(<Pomodoro width={800} height={600} />, document.getElementById('root'));
+ReactDOM.render(<Pomodoro width={640} height={480} />, document.getElementById('root'));
 registerServiceWorker();

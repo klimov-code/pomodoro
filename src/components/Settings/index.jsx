@@ -6,13 +6,12 @@ import './index.scss';
 export default class Settings extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      workTime: 25,
-      restTime: 5
-    }
-    this.changeWorkTime = this.changeWorkTime.bind(this);
-    this.changeRestTime = this.changeRestTime.bind(this);
     this.handleSettingsTab = this.handleSettingsTab.bind(this);
+  }
+
+  state = {
+    workTime: 25,
+    restTime: 5
   }
 
   static propTypes = {

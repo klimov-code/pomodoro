@@ -7,13 +7,13 @@ const Dial = ({ dial, currentColor }) =>
       <Rect
         key={index}
 
-        cornerRadius={8}
+        cornerRadius={7}
         fill={currentColor}
         opacity={division.opacity}
 
         x={division.x}
         y={division.y - 50}
-        width={20}
+        width={14}
         height={index % 5 ? 60 : 80}
 
         rotation={division.rotation}

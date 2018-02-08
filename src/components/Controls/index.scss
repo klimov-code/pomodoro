@@ -14,6 +14,7 @@ $base-size: 1em;
     padding: $base-size;
 
     cursor: pointer;
+    transition: all .5s cubic-bezier(.455, .03, .515, .955);
     text-decoration: none;
 
     border: none;
@@ -22,7 +23,6 @@ $base-size: 1em;
     background-color: $base-bg-color;
 
     font-size: $base-size * 1.25;
-    transition: all .5s cubic-bezier(.455, .03, .515, .955);
     & .play {
       position: relative;
 

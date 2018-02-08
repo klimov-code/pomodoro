@@ -19,6 +19,15 @@ const setRgbIncrement = (firstRgbColor, lastRgbColor, steps) => {
   };
 }
 
+/**
+ * (creates array of color steps)
+ * 
+ * @param {string} firstColor
+ * @param {string} lastColor
+ * @param {number} steps
+ * @param {boolean} [reverse=false]
+ * @returns {arrayOf(string)} result
+ **/
 export const createGradientSteps = (firstColor, lastColor, steps, reverse = false) => {
   const firstRgbColor = hexToRgb(firstColor),
         lastRgbColor = hexToRgb(lastColor);
