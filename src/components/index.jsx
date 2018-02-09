@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Title from './Title';
 import Header from './Header';
 import Controls from './Controls';
-import Settings from './Settings';
+import Menu from './Menu';
 import Clockface from './Clockface';
 import Footer from './Footer';
 
@@ -245,7 +245,7 @@ export default class Pomodoro extends Component {
           skipTimer={this.skipTimer}
           play={play}
         />
-        <Settings
+        <Menu
           handleWorkTime={this.handleWorkTime}
           handleRestTime={this.handleRestTime}
           play={play}

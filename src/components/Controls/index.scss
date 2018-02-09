@@ -1,7 +1,7 @@
 $base-tomato-color: #FF6347;
 $base-green-color: #2ECC71;
 $base-bg-color: #EEE;
-$base-size: 1em;
+$base-button-size: 1em;
 
 .controls {
   align-self: center;
@@ -11,7 +11,7 @@ $base-size: 1em;
 
   &__button {
     margin-right: 25px;
-    padding: $base-size;
+    padding: $base-button-size;
 
     cursor: pointer;
     transition: all .5s cubic-bezier(.455, .03, .515, .955);
@@ -22,15 +22,15 @@ $base-size: 1em;
     outline: none;
     background-color: $base-bg-color;
 
-    font-size: $base-size * 1.25;
+    font-size: $base-button-size * 1.25;
     & .play {
       position: relative;
 
       display: block;
       overflow: hidden;
 
-      width: $base-size * 1.5;
-      height: $base-size * 1.5;
+      width: $base-button-size * 1.5;
+      height: $base-button-size * 1.5;
       & .left,
       & .right {
         width: 33%;
@@ -64,9 +64,9 @@ $base-size: 1em;
 
         transition: transform .3s ease;
 
-        border-top: ($base-size * .75) solid transparent;
-        border-right: ($base-size * 1.5) solid $base-tomato-color;
-        border-bottom: ($base-size * .75) solid transparent;
+        border-top: ($base-button-size * .75) solid transparent;
+        border-right: ($base-button-size * 1.5) solid $base-tomato-color;
+        border-bottom: ($base-button-size * .75) solid transparent;
         background-color: transparent;
       }
     }
@@ -83,14 +83,9 @@ $base-size: 1em;
       }
     }
     &:nth-child(2) {
-      padding: $base-size * 1.25;
+      padding: $base-button-size * 1.25;
 
       background-color: $base-tomato-color;
-    }
-    &[disabled] {
-      cursor: not-allowed;
-
-      color: $base-bg-color;
     }
   }
 }

@@ -3,4 +3,18 @@
 
   grid-area: clockface;
   justify-self: center;
+  & canvas {
+    z-index: -1;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .konvajs-content {
+    width: 320px !important;
+    height: 240px !important;
+    & canvas {
+      width: 320px !important;
+      height: 240px !important;
+    }
+  }
 }

@@ -1,11 +1,10 @@
 import React from 'react';
 import { Text } from 'react-konva';
 
-
 const Timer = ({ time, currentColor, x, y }) =>
   <Text
     fontFamily={'Roboto'}
-    fontSize={100}
+    fontSize={128}
     fontStyle={'bold'}
 
     text={time}
@@ -15,11 +14,11 @@ const Timer = ({ time, currentColor, x, y }) =>
     x={x}
     y={y}
     width={512}
-    height={100}
+    height={128}
 
     offset={{
       x: 256,
-      y: 50
+      y: 64
     }}
   />
 

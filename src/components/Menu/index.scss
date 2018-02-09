@@ -1,20 +1,21 @@
 $base-tomato-color: #FF6347;
 $base-green-color: #2ECC71;
 $base-bg-color: #EEE;
-$option-width: 300px;
+$item-width: 450px;
 $slider-label-width: 40px;
 $slider-width: calc(100% - (#{$slider-label-width + 30px}));
 $slider-thumb-size: 22px;
+$button-size: 1em;
 
 @mixin bg-thumb-tomato($slider-type) {
   &::-#{$slider-type}-thumb {
-    background-image: linear-gradient(to bottom, #FFB1A3 0%, #FF6347 100%);
+    background-image: linear-gradient(to bottom, lighten($base-tomato-color, 30%) 0%, $base-tomato-color 100%);
   }
 }
 
 @mixin bg-thumb-green($slider-type) {
   &::-#{$slider-type}-thumb {
-    background-image: linear-gradient(to bottom, #93BFA5 0%, #2ECC71 100%);
+    background-image: linear-gradient(to bottom, lighten($base-green-color, 35%) 0%, $base-green-color 100%);
   }
 }
 
@@ -22,14 +23,15 @@ $slider-thumb-size: 22px;
   &::-#{$thumb-type}-thumb {
     width: $slider-thumb-size;
     height: $slider-thumb-size;
-
     border-radius: 50%;
     @if $thumb-type==webkit-slider {
       -webkit-appearance: none;
       border: none;
-    } @else if $thumb-type==moz-range {
+    }
+    @else if $thumb-type==moz-range {
       border: none;
-    } @else if $thumb-type==ms {
+    }
+    @else if $thumb-type==ms {
       border: 0;
     }
   }
@@ -37,44 +39,98 @@ $slider-thumb-size: 22px;
 
 @mixin bg-value-arrow($bg-color) {
   background: $bg-color;
-  &:before {
+  &::before {
     border-right: 7px solid $bg-color;
   }
 }
 
-.settings {
-  position: fixed;
-  z-index: 100;
-  top: 25%;
-  right: 0;
+.menu {
+  &__button {
+    position: fixed;
+    z-index: 2;
+    top: 10px;
+    left: 10px;
 
-  display: block;
+    padding: $button-size;
 
-  transition: all .8s cubic-bezier(.455, .03, .515, .955);
+    cursor: pointer;
+    text-decoration: none;
 
-  backface-visibility: hidden;
-  &.hide {
-    right: -400px;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    background-color: rgb(80, 80, 80);
+    &[disabled] {
+      visibility: hidden;
+
+      color: transparent;
+      background-color: transparent;
+    }
   }
-  &__form {
-    padding: 20px;
+  &__overlay {
+    position: fixed;
+    top: calc(50px + (#{$button-size / 2}));
+    left: calc(50px + (#{$button-size / 2}));
 
-    border: 1px solid black;
-    border-radius: 4%;
-    background-color: #FFF;
+    width: 600vw;
+    height: 600vw;
+
+    transition: all .5s cubic-bezier(.445, .05, .55, .95);
+    transform: translate3d(-50%, -50%, 0);
+    transform-origin: center;
+
+    border-radius: 50%;
+    background-color: $base-bg-color;
+    &.hide {
+      width: 0;
+      height: 0;
+    }
+  }
+  &__items {
+    position: absolute;
+
+    display: grid;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 10%;
+
+    transition: all .33s cubic-bezier(.445, .05, .55, .95);
+    transform: translateY(-25%);
+
+    opacity: 1;
+    z-index: 1;
+    &.hide {
+      transform: translateY(-200%);
+
+      opacity: 0;
+    }
   }
 }
 
-.option {
-  width: $option-width;
-  margin-bottom: 20px;
-  &__label {
-    display: inline-block;
+.items {
+  &__title {
+    text-align: center;
+  }
+  &__description {
+    margin: 1em 3em;
+  }
+  &__settings {
+    display: grid;
+    margin: 1em 3em;
+  }
+}
 
+.item {
+  width: $item-width;
+  margin-top: 1.5em;
+  justify-self: center;
+  &__label {
     margin: 0 auto;
 
-    text-align: center;
-    text-transform: capitalize;
+    text-transform: uppercase;
   }
   &__range {
     width: $slider-width;
@@ -83,9 +139,12 @@ $slider-thumb-size: 22px;
     border: none;
     border-radius: 1vw;
     outline: none;
-    background: $base-bg-color;
+    background: $base-bg-color - #222;
 
     -webkit-appearance: none;
+    @include bg-thumb(webkit-slider);
+    @include bg-thumb(moz-range);
+    @include bg-thumb(ms);
 
     &::-moz-range-track {
       border: inherit;
@@ -103,10 +162,6 @@ $slider-thumb-size: 22px;
     &::-ms-tooltip {
       display: none;
     }
-
-    @include bg-thumb(webkit-slider);
-    @include bg-thumb(moz-range);
-    @include bg-thumb(ms);
     &--work {
       @include bg-thumb-tomato(webkit-slider);
       @include bg-thumb-tomato(moz-range);
@@ -131,7 +186,7 @@ $slider-thumb-size: 22px;
 
     color: #FFF;
     border-radius: 10%;
-    &:before {
+    &::before {
       position: absolute;
       top: 7px;
       left: -7px;

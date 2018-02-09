@@ -11,14 +11,6 @@ export default class Controls extends Component {
     play: bool
   }
 
-  handleSettingsTab(e) {
-    e.preventDefault();
-
-    const settings = document.querySelector('.settings');
-
-    settings.classList.toggle('hide');
-  }
-
   render() {
     const {
       toggleTimer,
@@ -28,7 +20,7 @@ export default class Controls extends Component {
     } = this.props;
 
     return (
-      <section className='controls'>
+      <nav className='controls'>
         <button className='controls__button fi fi-stop' type='button' onClick={resetTimer} />
         <button className='controls__button' type='button' onClick={toggleTimer}>
           <i className={'play' + (play ? '' : ' pause') }>
@@ -39,8 +31,7 @@ export default class Controls extends Component {
           </i>
         </button>
         <button className='controls__button fi fi-skip' type='button' onClick={skipTimer} />
-        <button className='controls__button fi fi-settings' type='button' onClick={this.handleSettingsTab}  disabled={play} />
-      </section>
+      </nav>
     );
   }
 }
