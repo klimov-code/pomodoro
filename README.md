@@ -15,9 +15,9 @@
   - [ ] adaptability
   - [x] component styles
     - [x] header
-    - [x] clockface
     - [x] controls
-    - [x] settings
+    - [x] clockface
+    - [x] menu
     - [x] footer
 - [ ] audio notification
   - [ ] several different audios

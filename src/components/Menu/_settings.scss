@@ -1,0 +1,131 @@
+@mixin bg-thumb-tomato($slider-type) {
+  &::-#{$slider-type}-thumb {
+    background-image: linear-gradient(to bottom, lighten($base-tomato-color, 30%) 0%, $base-tomato-color 100%);
+  }
+}
+
+@mixin bg-thumb-green($slider-type) {
+  &::-#{$slider-type}-thumb {
+    background-image: linear-gradient(to bottom, lighten($base-green-color, 35%) 0%, $base-green-color 100%);
+  }
+}
+
+@mixin bg-thumb($thumb-type) {
+  &::-#{$thumb-type}-thumb {
+    width: $slider-thumb-size;
+    height: $slider-thumb-size;
+    border-radius: 50%;
+    @if $thumb-type==webkit-slider {
+      -webkit-appearance: none;
+      border: none;
+    }
+    @else if $thumb-type==moz-range {
+      border: none;
+    }
+    @else if $thumb-type==ms {
+      border: 0;
+    }
+  }
+}
+
+@mixin bg-value-arrow($bg-color) {
+  background: $bg-color;
+  &::before {
+    border-right: 7px solid $bg-color;
+  }
+}
+
+.item {
+  width: $item-width;
+  margin-top: 1.5em;
+
+  justify-self: center;
+  &__label {
+    margin: 0 auto;
+
+    text-transform: uppercase;
+  }
+  &__range {
+    width: $slider-width;
+    height: $slider-thumb-size / 2;
+
+    border: none;
+    border-radius: 1vw;
+    outline: none;
+    background: $base-bg-color - #222;
+
+    -webkit-appearance: none;
+
+    @include bg-thumb(webkit-slider);
+
+    @include bg-thumb(moz-range);
+
+    @include bg-thumb(ms);
+    &::-moz-range-track {
+      border: inherit;
+      background: transparent;
+    }
+    &::-ms-track {
+      color: transparent;
+      border: inherit;
+      background: transparent;
+    }
+    &::-ms-fill-lower,
+    ::-ms-fill-upper {
+      background: transparent;
+    }
+    &::-ms-tooltip {
+      display: none;
+    }
+    &--work {
+      @include bg-thumb-tomato(webkit-slider);
+
+      @include bg-thumb-tomato(moz-range);
+
+      @include bg-thumb-tomato(ms);
+    }
+    &--rest {
+      @include bg-thumb-green(webkit-slider);
+
+      @include bg-thumb-green(moz-range);
+
+      @include bg-thumb-green(ms);
+    }
+  }
+  &__value {
+    position: relative;
+
+    display: inline-block;
+
+    width: $slider-label-width;
+    margin-left: 15px;
+    padding: 5px;
+
+    text-align: center;
+
+    color: #FFF;
+    border-radius: 10%;
+    &::before {
+      position: absolute;
+      top: 7px;
+      left: -7px;
+
+      width: 0;
+      height: 0;
+
+      content: '';
+
+      border-top: 7px solid transparent;
+      border-bottom: 7px solid transparent;
+    }
+    &--work {
+      @include bg-value-arrow($base-tomato-color);
+    }
+    &--rest {
+      @include bg-value-arrow($base-green-color);
+    }
+  }
+  &__checkbox {
+    margin-right: 8px;
+  }
+}

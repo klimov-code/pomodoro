@@ -14,7 +14,6 @@ $base-button-size: 1em;
     padding: $base-button-size;
 
     cursor: pointer;
-    transition: all .5s cubic-bezier(.455, .03, .515, .955);
     text-decoration: none;
 
     border: none;
@@ -36,7 +35,7 @@ $base-button-size: 1em;
         width: 33%;
         height: 100%;
 
-        transition: all .3s ease;
+        transition: all .15s ease;
 
         background-color: #FFF;
       }
@@ -62,7 +61,7 @@ $base-button-size: 1em;
         width: 0;
         height: 0;
 
-        transition: transform .3s ease;
+        transition: transform .15s ease;
 
         border-top: ($base-button-size * .75) solid transparent;
         border-right: ($base-button-size * 1.5) solid $base-tomato-color;

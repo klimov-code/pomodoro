@@ -1,0 +1,8 @@
+.items {
+  display: grid;
+
+  margin: 1em 3em;
+  &__title {
+    text-align: center;
+  }
+}

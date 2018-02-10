@@ -51,8 +51,11 @@ export default class Menu extends Component {
     const overlay = document.querySelector('.menu__overlay');
     const items = document.querySelector('.menu__items');
     const toggle = [ overlay, items ];
+    const button = document.querySelector('.menu__hamburger');
+    button.classList.toggle('active');
 
     toggle.forEach(v => v.classList.toggle('hide'));
+
   }
 
   render() {
@@ -62,7 +65,11 @@ export default class Menu extends Component {
     return (
       <section className='menu'>
         <div className='menu__overlay hide' />
-        <button className='menu__button' type='button' onClick={this.handleSettingsTab} disabled={play} />
+        <button className='menu__hamburger' type='button' onClick={this.handleSettingsTab}>
+          <div className='hamburger-box'>
+            <div className='hamburger-inner'></div>
+          </div>
+        </button>
         <menu className='menu__items hide'>
           <Header />
           <Howto />
