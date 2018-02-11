@@ -129,3 +129,9 @@
     margin-right: 8px;
   }
 }
+
+@media screen and (max-width: 375px) {
+  .item {
+    width: 320px;
+  }
+}

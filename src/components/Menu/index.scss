@@ -1,11 +1,11 @@
 $base-tomato-color: #FF6347 !default;
 $base-green-color: #2ECC71 !default;
 $base-bg-color: #EEE !default;
-$corner-button-position: 2em !default;
-$corner-button-size: 1em !default;
+$hamburger-position: 1em !default;
+$hamburger-size: 1em !default;
 $hamburger-padding-x: 15px !default;
 $hamburger-padding-y: 15px !default;
-$hamburger-layer-width: 40px !default;
+$hamburger-layer-width: 30px !default;
 $hamburger-layer-height: 4px !default;
 $hamburger-layer-spacing: 6px !default;
 $hamburger-layer-color: #000 !default;
@@ -27,13 +27,13 @@ $slider-thumb-size: 22px !default;
   * @author Jonathan Suh @jonsuh
   * @link https://github.com/jonsuh/hamburgers
   * 
-  * modified by therapy
+  * @modified by therapy
   */
   &__hamburger {
     position: fixed;
     z-index: 2;
-    top: $corner-button-position;
-    left: $corner-button-position;
+    top: $hamburger-position;
+    left: $hamburger-position;
 
     display: inline-block;
     overflow: visible;
@@ -42,7 +42,7 @@ $slider-thumb-size: 22px !default;
     padding: $hamburger-padding-y $hamburger-padding-x;
 
     cursor: pointer;
-    transition-timing-function: $hamburger-hover-transition-timing-function; // Normalize (<button>)
+    transition-timing-function: $hamburger-hover-transition-timing-function;
     transition-duration: $hamburger-hover-transition-duration;
     transition-property: opacity, filter;
     text-transform: none;
@@ -127,8 +127,8 @@ $slider-thumb-size: 22px !default;
   }
   &__overlay {
     position: fixed;
-    top: $corner-button-position + ($corner-button-size / 2);
-    left: $corner-button-position + ($corner-button-size / 2);
+    top: $hamburger-position + ($hamburger-size / 2);
+    left: $hamburger-position + ($hamburger-size / 2);
 
     width: 600vw;
     height: 600vw;
@@ -157,7 +157,7 @@ $slider-thumb-size: 22px !default;
     padding: 0 10%;
 
     transition: all .33s cubic-bezier(.445, .05, .55, .95);
-    transform: translateY(-25%);
+    transform: translateY(-30%);
 
     opacity: 1;
     &.hide {
@@ -165,5 +165,20 @@ $slider-thumb-size: 22px !default;
 
       opacity: 0;
     }
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .menu {
+    &__hamburger {
+      top: $hamburger-position / 2;
+      left: $hamburger-position / 2;
+    }
+    &__items {
+      padding: 0;
+    }
+  }
+  .item {
+    width: 320px;
   }
 }
