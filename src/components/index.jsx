@@ -252,6 +252,7 @@ export default class Pomodoro extends Component {
           resetTimer={this.resetTimer}
           skipTimer={this.skipTimer}
           play={play}
+          mode={mode}
         />
         <Menu
           handleWorkTime={this.handleWorkTime}

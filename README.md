@@ -19,7 +19,7 @@
     - [x] clockface
     - [x] menu
     - [x] footer
-- [ ] audio notification
+- [x] audio notification
   - [ ] several different audios
   - [ ] select audio
 - [x] favicon
