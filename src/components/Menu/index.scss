@@ -54,7 +54,7 @@ $slider-thumb-size: 22px !default;
 
     font: inherit;
 
-    &.active {
+    &.show {
       & .hamburger-inner {
         transition-delay: .12s;
         transition-timing-function: cubic-bezier(.215, .61, .355, 1);
@@ -105,7 +105,7 @@ $slider-thumb-size: 22px !default;
         transition-property: transform;
 
         border-radius: $hamburger-layer-border-radius;
-        background-color: $hamburger-layer-color;
+        background-color: $base-bg-color - #888;
       }
       &::before,
       &::after {
@@ -139,7 +139,7 @@ $slider-thumb-size: 22px !default;
 
     border-radius: 50%;
     background-color: $base-bg-color;
-    &.hide {
+    &.show {
       width: 0;
       height: 0;
     }
@@ -160,7 +160,7 @@ $slider-thumb-size: 22px !default;
     transform: translateY(-30%);
 
     opacity: 1;
-    &.hide {
+    &.show {
       transform: translateY(-200%);
 
       opacity: 0;

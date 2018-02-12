@@ -71,6 +71,14 @@ module.exports = {
             },
           },
           {
+            test: [/\.ogg$/, /\.m4r$/, /\.mp3$/],
+            loader: require.resolve('file-loader'),
+            options: {
+              limit: 25000,
+              name: 'static/media/audio/[name].[hash:8].[ext]',
+            },
+          },
+          {
             test: /Flaticon\.\w+/,
             loader: require.resolve('file-loader'),
             options: {

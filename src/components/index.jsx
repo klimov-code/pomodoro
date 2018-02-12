@@ -7,11 +7,14 @@ import Menu from './Menu';
 import Clockface from './Clockface';
 import Footer from './Footer';
 
+import notification from '../audio/notification.ogg';
+
 import './index.scss';
 
 export default class Pomodoro extends Component {
   constructor(props) {
     super(props);
+    this.audioNotification = new Audio(notification);
     this.tick = this.tick.bind(this);
     this.toggleTimer = this.toggleTimer.bind(this);
     this.resetTimer = this.resetTimer.bind(this);
@@ -87,6 +90,7 @@ export default class Pomodoro extends Component {
         fill: prevState.fill + 1
       }));
     } else {
+      this.audioNotify();
       this.switchMode();
     }
   }
@@ -217,6 +221,10 @@ export default class Pomodoro extends Component {
 
   resetLocalStorage() {
     window.localStorage.removeItem('pomodoroState');
+  }
+
+  audioNotify() {
+    this.audioNotification.play();
   }
 
   render() {

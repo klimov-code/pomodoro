@@ -5,7 +5,6 @@ import Header from './Header';
 import Howto from './Howto';
 import Settings from './Settings';
 import Slider from './Settings/Slider';
-import Checkbox from './Settings/Checkbox';
 import Footer from './Footer';
 
 import './index.scss';
@@ -49,12 +48,11 @@ export default class Menu extends Component {
     e.preventDefault();
 
     const overlay = document.querySelector('.menu__overlay');
-    const items = document.querySelector('.menu__items');
-    const toggle = [ overlay, items ];
     const button = document.querySelector('.menu__hamburger');
-    button.classList.toggle('active');
+    const items = document.querySelector('.menu__items');
+    const toggle = [ overlay, button, items ];
 
-    toggle.forEach(v => v.classList.toggle('hide'));
+    toggle.forEach(v => v.classList.toggle('show'));
 
   }
 
@@ -64,13 +62,13 @@ export default class Menu extends Component {
 
     return (
       <section className='menu'>
-        <div className='menu__overlay hide' />
+        <div className='menu__overlay show' />
         <button className='menu__hamburger' type='button' onClick={this.handleSettingsTab}>
           <div className='hamburger-box'>
             <div className='hamburger-inner'></div>
           </div>
         </button>
-        <menu className='menu__items hide'>
+        <menu className='menu__items show'>
           <Header />
           <Howto />
           <Settings>
@@ -87,10 +85,6 @@ export default class Menu extends Component {
               changeTime={this.changeRestTime}
               time={restTime}
               play={play}
-            />
-            <Checkbox 
-              id={'save'}
-              text={'save results'}
             />
           </Settings>
           <Footer />
