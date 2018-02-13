@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Mousetrap from 'mousetrap';
 
 import Title from './Title';
 import Header from './Header';
@@ -38,6 +39,7 @@ export default class Pomodoro extends Component {
   componentWillMount() {
     const restoreState = window.localStorage.getItem('pomodoroState') || undefined;
     this.setInitialState(restoreState);
+    this.bindShortcuts();
   }
 
   componentDidUpdate() {
@@ -46,6 +48,7 @@ export default class Pomodoro extends Component {
 
   componentWillUnmount() {
     clearInterval(this.countdown);
+    this.unbindShortcuts();
   }
 
   setInitialState(initialState) {
@@ -225,6 +228,18 @@ export default class Pomodoro extends Component {
 
   audioNotify() {
     this.audioNotification.play();
+  }
+
+  bindShortcuts() {
+    Mousetrap.bind('space', this.toggleTimer);
+    Mousetrap.bind('shift+r', this.resetTimer);
+    Mousetrap.bind('shift+s', this.skipTimer);
+  }
+
+  unbindShortcuts() {
+    Mousetrap.unbind('space');
+    Mousetrap.unbind('shift+r');
+    Mousetrap.unbind('shift+s');
   }
 
   render() {

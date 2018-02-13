@@ -48,7 +48,7 @@ export default class Clockface extends Component {
     }
 
     // dial ref
-    const animateDial = this.refs.dial.children[0].children;
+    const animateDial = this.layer.children[0].children;
     const { dial, fill } = nextProps;
     
     animateDial.forEach((division, index) =>
@@ -117,7 +117,7 @@ export default class Clockface extends Component {
 
     return (
       <Stage width={width} height={height} className='clockface'>
-        <Layer ref={'dial'}>
+        <Layer ref={(layer) => this.layer = layer}>
           <Dial
             dial={dial}
             currentColor={currentColor}
@@ -132,7 +132,7 @@ export default class Clockface extends Component {
             timePercent={timePercent}
             currentColor={currentColor}
             x={width / 4}
-            y={height / 2 + 150}
+            y={height / 2 + 215}
           />
         </Layer>
       </Stage>

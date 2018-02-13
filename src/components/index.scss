@@ -3,7 +3,7 @@
 
   grid-template-areas: 'header' 'controls' 'menu' 'clockface' 'footer';
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1fr auto;
+  grid-template-rows: 1fr 1fr auto;
 
   height: 100vh;
 }

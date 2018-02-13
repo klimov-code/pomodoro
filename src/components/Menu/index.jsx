@@ -54,6 +54,8 @@ export default class Menu extends Component {
 
     toggle.forEach(v => v.classList.toggle('show'));
 
+    // unfocus for Mousetrap work correctly
+    e.currentTarget.blur();
   }
 
   render() {
