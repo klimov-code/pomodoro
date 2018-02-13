@@ -111,13 +111,9 @@ export default class Pomodoro extends Component {
       workTime,
       restTime,
       mode,
-      workCount,
-      restCount
+      workCount
     } = this.state;
-
-    const nextWorkCount = workCount + 1,
-      nextRestCount = restCount + 1;
-
+    const nextWorkCount = workCount + 1;
     const nextMode = (mode === 'rest') ? 'work' : 'rest';
     const nextCurrentTime = (nextMode === 'rest' && nextWorkCount % 4)
       ? restTime
@@ -129,12 +125,10 @@ export default class Pomodoro extends Component {
       this.setState(prevState => ({
         workCount: prevState.workCount + 1
       }));
-      console.info('%cPomodoro Count: ' + nextWorkCount, 'color: tomato');
     } else {
       this.setState(prevState => ({
         restCount: prevState.restCount + 1
       }));
-      console.info('%cRest Count: ' + nextRestCount, 'color: green');
     }
 
     this.setState({
@@ -147,8 +141,8 @@ export default class Pomodoro extends Component {
   getCoordinates(index) {
     const { width, height } = this.props;
     const degree = 6;
-    const setX = (width / 2) + Math.cos(degree * index * (Math.PI / 180)) * height / 2;
-    const setY = (height / 2) + Math.sin(degree * index * (Math.PI / 180)) * height / 2;
+    const setX = width / 2 + Math.cos(degree * index * (Math.PI / 180)) * height / 2;
+    const setY = height / 2 + Math.sin(degree * index * (Math.PI / 180)) * height / 2;
 
     return { degree, setX, setY };
   }

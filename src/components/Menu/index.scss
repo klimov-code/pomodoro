@@ -1,6 +1,7 @@
 $base-tomato-color: #FF6347 !default;
 $base-green-color: #2ECC71 !default;
 $base-bg-color: #EEE !default;
+
 $hamburger-position: 1em !default;
 $hamburger-size: 1em !default;
 $hamburger-padding-x: 15px !default;
@@ -13,6 +14,7 @@ $hamburger-layer-border-radius: 4px !default;
 $hamburger-hover-opacity: .7 !default;
 $hamburger-hover-transition-duration: .15s !default;
 $hamburger-hover-transition-timing-function: linear !default;
+
 $item-width: 450px !default;
 $slider-label-width: 40px !default;
 $slider-width: calc(100% - (#{$slider-label-width + 30px})) !default;
@@ -157,7 +159,7 @@ $slider-thumb-size: 22px !default;
     padding: 0 10%;
 
     transition: all .33s cubic-bezier(.445, .05, .55, .95);
-    transform: translateY(-30%);
+    transform: translateY(-25%);
 
     opacity: 1;
     &.show {
@@ -171,8 +173,10 @@ $slider-thumb-size: 22px !default;
 @media screen and (max-width: 375px) {
   .menu {
     &__hamburger {
-      top: $hamburger-position / 2;
-      left: $hamburger-position / 2;
+      top: 0;
+      left: 0;
+
+      padding: $hamburger-padding-y / 1.5 $hamburger-padding-x / 1.5;
     }
     &__items {
       padding: 0;

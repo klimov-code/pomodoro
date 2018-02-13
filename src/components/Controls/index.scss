@@ -87,8 +87,9 @@ $base-button-size: 1em;
       background-color: $base-tomato-color;
     }
     &--rest {
-      @extend .controls__button;
       background-color: $base-green-color !important;
+
+      @extend .controls__button;
       & .triangle-1,
       & .triangle-2 {
         border-right: ($base-button-size * 1.5) solid $base-green-color !important;

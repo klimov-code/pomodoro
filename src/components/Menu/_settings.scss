@@ -61,6 +61,7 @@
     @include bg-thumb(moz-range);
 
     @include bg-thumb(ms);
+
     &::-moz-range-track {
       border: inherit;
       background: transparent;

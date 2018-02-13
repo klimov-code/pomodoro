@@ -11,8 +11,8 @@
   - [x] controls
   - [x] configurable time
     - [x] constraints (for example -> work > break)
-- [ ] css
-  - [ ] adaptability
+- [x] css
+  - [x] adaptability
   - [x] component styles
     - [x] header
     - [x] controls
@@ -24,7 +24,7 @@
   - [ ] select audio
 - [x] favicon
 - [ ] localization
-- [ ] social networks
+- [x] social networks
 - [ ] pugjs support in react and webpack
 - [x] sass support in webpack
 - [ ] tests
